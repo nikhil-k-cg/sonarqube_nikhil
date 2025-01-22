@@ -61,12 +61,16 @@ pipeline {
                 url: 'https://github.com/nikhil-k-cg/jenkins_test.git'
             }
         }
+        
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarScanner';
-            withSonarQubeEnv() {
-              sh "${scannerHome}/bin/sonar-scanner"
+            steps {
+                def scannerHome = tool 'SonarScanner';
+                withSonarQubeEnv() {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
             }
           }
+        
         stage('Build Docker Image') {
             steps {
                 script {
